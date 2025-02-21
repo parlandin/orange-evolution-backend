@@ -8,7 +8,13 @@ const PORT = process.env.PORT || 3000;
 
 //config
 app.use(json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 app.use(urlencoded({ extended: false }));
 
 app.use(routes);
