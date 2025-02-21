@@ -131,6 +131,20 @@ async function main() {
     });
   }
 
+  await prisma.users.upsert({
+    where: { email: "admin@test.com" },
+    update: {},
+    create: {
+      id: crypto.randomUUID(),
+      name: "Admin",
+      email: "admin@test.com",
+      password: await generatePasswordHash("admin"),
+      role: "ADMIN",
+      picture:
+        "https://api.dicebear.com/9.x/notionists-neutral/svg?seed=Christian&randomizeIds=true",
+    },
+  });
+
   console.log("Database populated successfully!");
 }
 
